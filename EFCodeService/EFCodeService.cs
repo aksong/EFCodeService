@@ -20,6 +20,15 @@ namespace EFCodeService
             _codeLength = codeLength;
         }
 
+        public void Populate(string title, Action<string> code, Action<string> slug)
+        {
+            if (string.IsNullOrEmpty(title))
+                throw new ArgumentException("title");
+
+            code(GenerateCode());
+            slug(GenerateSlug(title));
+        }
+
         public string GenerateSlug(string title)
         {
             return title.GenerateSlug();
