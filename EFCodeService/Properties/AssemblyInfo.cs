@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("EFCodeService")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Generate alphanumeric codes and slugs for URLS with Entity Framework")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Douglas Tarr")]
 [assembly: AssemblyProduct("EFCodeService")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
