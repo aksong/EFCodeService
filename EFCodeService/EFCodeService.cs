@@ -36,21 +36,25 @@ namespace EFCodeService
 
         public string GenerateCode()
         {
-            int counter = 0;
             var dbset = _context.Set(typeof(EFCode));
-			while (true) {
-				var code = Utilities.GenerateRandomString(_codeLength);
-					dbset.Add(new EFCode { Code = code });
-					try {
-						_context.SaveChanges();
-                        return code;
-					} catch {
-                        if (counter++ > MAX_TRIES)
-                            return null;
-
-					}
-				}
-		}
+            var random = new Random();
+            int counter = 0;
+            while (true)
+            {
+                var code = Utilities.GenerateRandomString(_codeLength, random);
+                dbset.Add(new EFCode { Code = code });
+                try
+                {
+                    _context.SaveChanges();
+                    return code;
+                }
+                catch
+                {
+                    if (counter++ > MAX_TRIES)
+                        throw new ApplicationException("Could not generate random code. Database issue?");
+                }
+            }
+        }
 
 
     }

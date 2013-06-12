@@ -9,11 +9,10 @@ namespace EFCodeService
 {
     public static class Utilities
     {
-        public static string GenerateRandomString(int size)
+        public static string GenerateRandomString(int size, Random random)
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             var stringChars = new char[size];
-            var random = new Random();
 
             for (int i = 0; i < stringChars.Length; i++)
             {
