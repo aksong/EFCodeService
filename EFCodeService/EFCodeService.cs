@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace EFCodeService
 {
@@ -37,19 +38,22 @@ namespace EFCodeService
         public string GenerateCode()
         {
             var dbset = _context.Set(typeof(EFCode));
-            var random = new Random();
+
+            Random random = new Random();
             int counter = 0;
             while (true)
             {
                 var code = Utilities.GenerateRandomString(_codeLength, random);
+                Debug.WriteLine(code);
                 dbset.Add(new EFCode { Code = code });
                 try
                 {
                     _context.SaveChanges();
                     return code;
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Debug.WriteLine(ex.ToString());
                     if (counter++ > MAX_TRIES)
                         throw new ApplicationException("Could not generate random code. Database issue?");
                 }
