@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -9,18 +10,20 @@ namespace EFCodeService
 {
     public static class Utilities
     {
-        public static string GenerateRandomString(int size, Random random)
+        public static string GenerateRandomString(int maxSize)
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            var stringChars = new char[size];
-
-            for (int i = 0; i < stringChars.Length; i++)
+            byte[] data = new byte[1];
+            RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider();
+            crypto.GetNonZeroBytes(data);
+            data = new byte[maxSize];
+            crypto.GetNonZeroBytes(data);
+            StringBuilder result = new StringBuilder(maxSize);
+            foreach (byte b in data)
             {
-                stringChars[i] = chars[random.Next(chars.Length)];
+                result.Append(chars[b % (chars.Length)]);
             }
-
-            return new String(stringChars);
-
+            return result.ToString();
         }
 
         public static string RemoveAccent(this string txt)

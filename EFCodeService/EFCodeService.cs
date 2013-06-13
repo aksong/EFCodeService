@@ -43,7 +43,7 @@ namespace EFCodeService
             int counter = 0;
             while (true)
             {
-                var code = Utilities.GenerateRandomString(_codeLength, random);
+                var code = Utilities.GenerateRandomString(_codeLength);
                 Debug.WriteLine(code);
                 dbset.Add(new EFCode { Code = code });
                 try
