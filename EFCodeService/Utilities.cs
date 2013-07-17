@@ -50,6 +50,9 @@ namespace EFCodeService
             {
                 str = "default";
             }
+            if(string.IsNullOrEmpty(str)){
+                str = "default";                
+            }
             return str;
         }
 
